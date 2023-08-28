@@ -26,7 +26,7 @@ def export_matrix_to_txt(matrix, output_file):
             f.write(" ".join(map(str, row)) + "\n")
 
 if __name__ == "__main__":
-    image_path = "./images/l3.jpg"
+    image_path = "./images/frame.png"
     matrix = load_image_and_convert_to_matrix(image_path)
     output_file = "matrix_output.txt"  # Cambia el nombre del archivo si lo deseas
     export_matrix_to_txt(matrix, output_file)
