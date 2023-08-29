@@ -39,7 +39,7 @@ def find_coordinates(matrix, value):
 
 
 # Define la matriz y los puntos de inicio y final
-matrix = load_matrix_from_file("./matrix_output2.txt")
+matrix = load_matrix_from_file("./matrix_output3.txt")
 
 x_start, y_start = find_coordinates(matrix, 2)  # Buscar el punto de inicio (2)
 x_end, y_end = find_coordinates(matrix, 3) 
