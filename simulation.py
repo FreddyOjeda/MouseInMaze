@@ -24,7 +24,7 @@ def animate_path():
         y2 = y1 + cell_size // 2
         canvas.create_oval(x1, y1, x2, y2, fill="green")
         window.update()
-        time.sleep(0.05)
+        #time.sleep(0.05)
         canvas.update()
 
 laberinto=load_maze_from_file("./matrix_output3.txt")
