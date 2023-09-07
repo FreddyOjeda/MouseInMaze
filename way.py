@@ -100,25 +100,81 @@ def find_coordinates(matrix, value):
                 return x, y
     return None, None
 
+# # Define la matriz y los puntos de inicio y final
+# matrix = load_matrix_from_file("./matrix_output.txt")
+# x_start, y_start = find_coordinates(matrix, 2)  # Buscar el punto de inicio (2)
+# x_end, y_end = find_coordinates(matrix, 3) 
+# start_point = (x_start, y_start)
+# end_point = (x_end, y_end)
+# print("Punto de inicio" , start_point)
+# print("Punto de llegada: ",end_point)
+# #path = find_path_dfs(matrix, start_point, end_point)
+# path = find_path_bfs(matrix, start_point, end_point)
+# #path = find_path_a_star(matrix, start_point, end_point)
 
-# Define la matriz y los puntos de inicio y final
-matrix = load_matrix_from_file("./matrix_output.txt")
-x_start, y_start = find_coordinates(matrix, 2)  # Buscar el punto de inicio (2)
-x_end, y_end = find_coordinates(matrix, 3) 
-start_point = (x_start, y_start)
-end_point = (x_end, y_end)
-print("Punto de inicio" , start_point)
-print("Punto de llegada: ",end_point)
-#path = find_path_dfs(matrix, start_point, end_point)
-path = find_path_bfs(matrix, start_point, end_point)
-#path = find_path_a_star(matrix, start_point, end_point)
+# if path:
+#     print("Camino encontrado:")
+#     for x, y in path:
+#         matrix[y][x] = "X"  # Marcar el camino en la matriz
+#     for row in matrix:
+#         print(" ".join(map(str, row)))
+#     print(path)
+# else:
+#     print("No se encontró un camino válido.")
 
-if path:
-    print("Camino encontrado:")
-    for x, y in path:
-        matrix[y][x] = "X"  # Marcar el camino en la matriz
-    for row in matrix:
-        print(" ".join(map(str, row)))
-    print(path)
-else:
-    print("No se encontró un camino válido.")
+def solve_dfs():
+    matrix = load_matrix_from_file("./matrix_output.txt")
+    x_start, y_start = find_coordinates(matrix, 2)  # Buscar el punto de inicio (2)
+    x_end, y_end = find_coordinates(matrix, 3) 
+    start_point = (x_start, y_start)
+    end_point = (x_end, y_end)
+    print("Punto de inicio" , start_point)
+    print("Punto de llegada: ",end_point)
+    path = find_path_dfs(matrix, start_point, end_point)
+    if path:
+        print("Camino encontrado:")
+        for x, y in path:
+            matrix[y][x] = "X"  # Marcar el camino en la matriz
+        for row in matrix:
+            print(" ".join(map(str, row)))
+        print(path)
+    else:
+        print("No se encontró un camino válido.")
+
+def solve_bfs():
+    matrix = load_matrix_from_file("./matrix_output.txt")
+    x_start, y_start = find_coordinates(matrix, 2)  # Buscar el punto de inicio (2)
+    x_end, y_end = find_coordinates(matrix, 3) 
+    start_point = (x_start, y_start)
+    end_point = (x_end, y_end)
+    print("Punto de inicio" , start_point)
+    print("Punto de llegada: ",end_point)
+    path = find_path_bfs(matrix, start_point, end_point)
+    if path:
+        print("Camino encontrado:")
+        for x, y in path:
+            matrix[y][x] = "X"  # Marcar el camino en la matriz
+        for row in matrix:
+            print(" ".join(map(str, row)))
+        print(path)
+    else:
+        print("No se encontró un camino válido.")
+
+def solve_a_star():
+    matrix = load_matrix_from_file("./matrix_output.txt")
+    x_start, y_start = find_coordinates(matrix, 2)  # Buscar el punto de inicio (2)
+    x_end, y_end = find_coordinates(matrix, 3) 
+    start_point = (x_start, y_start)
+    end_point = (x_end, y_end)
+    print("Punto de inicio" , start_point)
+    print("Punto de llegada: ",end_point)
+    path = find_path_a_star(matrix, start_point, end_point)
+    if path:
+        print("Camino encontrado:")
+        for x, y in path:
+            matrix[y][x] = "X"  # Marcar el camino en la matriz
+        for row in matrix:
+            print(" ".join(map(str, row)))
+        print(path)
+    else:
+        print("No se encontró un camino válido.")

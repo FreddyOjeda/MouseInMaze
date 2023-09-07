@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
 from PIL import Image, ImageTk
+from ArrayMaker import arrayMaker
+from way import solve_dfs, solve_bfs, solve_a_star
 
 window = tk.Tk()
 window.title("Proyecto de inteligencia artificial generativa - IAG")
@@ -23,35 +25,41 @@ button_style = {"font": ("Helvetica", 10), "bg": "green", "fg": "white"}
 
 laberinto_image = None
 
+
+
+
 def select_image():
-    global laberinto_image
     file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.jpeg *.gif")])
     if file_path:
-        laberinto_image = load_image(file_path)
-        show_images_in_frames()
+        show_images_in_frames(file_path)
 
 def load_image(filename):
     image = Image.open(filename)
     return image
 
-def show_images_in_frames():
-    laberinto_image32 = ImageTk.PhotoImage(laberinto_image)
-    laberinto_image16 = ImageTk.PhotoImage(laberinto_image)
-    laberinto_image8 = ImageTk.PhotoImage(laberinto_image)
+def show_images_in_frames(path_image):
+    laberinto_image32 = arrayMaker(path_image)
 
     label_right_top.configure(image=laberinto_image32, text="Algortimo a")
     label_right_top.image = laberinto_image32
 
-    label_left_bottom.configure(image=laberinto_image16, text="Algortimo b")
-    label_left_bottom.image = laberinto_image16
+    label_left_bottom.configure(image=laberinto_image32, text="Algortimo b")
+    label_left_bottom.image = laberinto_image32
 
-    label_right_bottom.configure(image=laberinto_image8, text="Algortimo c")
-    label_right_bottom.image = laberinto_image8
+    label_right_bottom.configure(image=laberinto_image32, text="Algortimo c")
+    label_right_bottom.image = laberinto_image32
+
+
+#Ejecutar algoritmos
+def solve_algorithms():
+    solve_dfs()
+    solve_bfs()
+    solve_a_star()
 
 # Agregar contenido a las subsecciones (puedes agregar widgets aquí)
 label_left_top = tk.Label(subframe_left_top, text="Por favor seleccione el \n laberinto a solucionar:", **text_style)
 button_select_image = tk.Button(subframe_left_top, text="Seleccionar Imagen", command=select_image)
-button_run_algorithms = tk.Button(subframe_left_top, text="Ejecutar Algoritmos", **button_style)
+button_run_algorithms = tk.Button(subframe_left_top, text="Ejecutar Algoritmos", command=solve_algorithms, **button_style)
 label_members = tk.Label(subframe_left_top, text="Integrandes del grupo:\n\n- Mayerly Andrea Salcedo\n- Diego Alejandro Corredor Rojas\n- Freddy Esteban Ojeda Cogua", **text_style)
 label_right_top = tk.Label(subframe_right_top, text="Algortimo a")
 label_left_bottom = tk.Label(subframe_left_bottom, text="Algortimo b")
