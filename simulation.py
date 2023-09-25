@@ -9,15 +9,21 @@ window.title("Laberinto")
 canvas = tk.Canvas(window, width=500, height=500)
 canvas.pack()
 
-def load_image(filename):
-    image = Image.open(filename)
-    return image
+cam = ''
+cam2 = ''
+cam3 = ''
+cell_size = 15
 
-def invert_coordinates(coordinates):
-    inverted_coordinates = [(col, row) for row, col in coordinates]
-    return inverted_coordinates
+def load_maze_from_file(filename):
+    maze = []
+    with open(filename, "r") as file:
+        for line in file:
+            row = [int(cell) for cell in line.strip().split()]
+            maze.append(row)
+    return maze
 
-def animate_path():
+def animate_path(camN):
+    camino = invert_coordinates(camN)
     for step in camino:
         row, col = step
         x1 = col * cell_size + cell_size // 4
@@ -29,10 +35,9 @@ def animate_path():
         time.sleep(0.05)
         canvas.update()
 
-def run_algorithms():
-    global camino
-    camino = invert_coordinates(cam2)
-    animate_path()
+def invert_coordinates(coordinates):
+    inverted_coordinates = [(col, row) for row, col in coordinates]
+    return inverted_coordinates   
 
 def read_coordinates_from_file(filename):
     coordinates = []
@@ -42,35 +47,27 @@ def read_coordinates_from_file(filename):
             coordinates.append((x, y))
     return coordinates
 
-laberinto_image = None
-camino1 = []
-camino2 = []
-camino3 = []
-cam = read_coordinates_from_file("path_dfs.txt")
-cam2 = read_coordinates_from_file("path_bfs.txt")
-cam3 = read_coordinates_from_file("path_a_star.txt")
-print("cam:", cam)
-print("cam2:", cam2)
-print("cam3:", cam3)
-cell_size = 15
+def get_simulation(algorithm):
+    if algorithm == "dfs":
+        cam = read_coordinates_from_file("path_dfs.txt")
+        animate_path(cam)
+    elif algorithm == "bfs":
+        cam2 = read_coordinates_from_file("path_bfs.txt")
+        animate_path(cam2)
+    elif algorithm == "a_star":
+        cam3 = read_coordinates_from_file("path_a_star.txt")
+        animate_path(cam3)
+    laberinto=load_maze_from_file("./matrix_output.txt")
 
-def select_image():
-    global laberinto_image
-    file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.jpeg *.gif")])
-    if file_path:
-        laberinto_image = load_image(file_path)
-        draw_labyrinth()
-
-def draw_labyrinth():
-    if laberinto_image:
-        img = ImageTk.PhotoImage(laberinto_image)
-        canvas.create_image(0, 0, anchor=tk.NW, image=img)
-        canvas.image = img
-
-select_button = tk.Button(window, text="Seleccionar Imagen", command=select_image)
-select_button.pack()
-
-run_button = tk.Button(window, text="Ejecutar Algoritmos", command=run_algorithms)
-run_button.pack()
-
-window.mainloop()
+    for i in range(len(laberinto)):
+        for j in range(len(laberinto[i])):
+            x1 = j * cell_size
+            y1 = i * cell_size
+            x2 = x1 + cell_size
+            y2 = y1 + cell_size
+            
+            if laberinto[i][j] == 1:
+                canvas.create_rectangle(x1, y1, x2, y2, fill="black")
+            else:
+                canvas.create_rectangle(x1, y1, x2, y2, fill="white")
+    animate_path()
