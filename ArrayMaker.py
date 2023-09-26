@@ -70,11 +70,15 @@ def export_matrix_to_txt(matrix, output_file):
         for row in matrix:
             f.write(" ".join(map(str, row)) + "\n")
 
-if __name__ == "__main__":
-    #image_path = "./images/pixil.png"
-    image_path = "./images/frameL.png"
-    matrix = load_image_and_convert_to_matrix2(image_path)
-    output_file = "matrix_output3.txt"  # Cambia el nombre del archivo si lo deseas
+# if __name__ == "__main__":
+#     #image_path = "./images/pixil.png"
+#     image_path = "./images/frameL.png"
+#     matrix = load_image_and_convert_to_matrix2(image_path)
+#     output_file = "matrix_output.txt"  # Cambia el nombre del archivo si lo deseas
+#     export_matrix_to_txt(matrix, output_file)
+
+def arrayMaker(imagen):
+    print('Se ha cargado el laberinto el txt de forma exitosa.')
+    matrix = load_image_and_convert_to_matrix2(imagen)
+    output_file = "matrix_output.txt"  # Cambia el nombre del archivo si lo deseas
     export_matrix_to_txt(matrix, output_file)
-
-
