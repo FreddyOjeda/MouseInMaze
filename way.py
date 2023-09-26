@@ -1,9 +1,6 @@
 from collections import deque
 import heapq
 
-import heapq
-from collections import deque
-
 def save_path_to_file(path, filename):
     with open(filename, "w") as file:
         for x, y in path:
